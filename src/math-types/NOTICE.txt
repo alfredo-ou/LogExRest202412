@@ -1,0 +1,36 @@
+Copyright 2019 Ideas project team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+   
+PROJECT
+
+   Ideas (Interactive Domain-specific Exercise Assistants) is a joint research
+   project between the Open University of the Netherlands and Utrecht
+   University. The project's goal is to use software and compiler technology to
+   build state-of-the-art components of intelligent tutoring systems (ITS) and
+   learning environments. The 'ideas' software package provides a generic
+   framework for constructing the expert knowledge module (also known as a
+   domain reasoner) for an ITS or learning environment. The 'ideas-math-types'
+   software package provides helper datatypes for implementing domain reasoners
+   for mathematics and logic. More information about the project can be found 
+   on the project's homepage:
+   
+       http://ideas.cs.uu.nl/
+       
+AUTHORS
+
+   The authors and copyright holders of the 'ideas-math-types' software package are:
+   - Bastiaan Heeren   (bastiaan.heeren@ou.nl, maintainer)
+   - Alex Gerdes       (agerdes@me.com)
+   - Johan Jeuring     (J.T.Jeuring@uu.nl)
+   - Josje Lodder      (josje.lodder@ou.nl)

@@ -1,0 +1,10 @@
+Changelog ideas-math-types-1.0 => ideas-math-types-1.1
+
+* adding missing semigroup instances 
+* ghc-8.7.6 compatibility (including containers library)
+
+ideas-math-types-1.0
+
+Initial version of the library. Some modules have been released in 2015 as part 
+of the ideas mathematics tutors (http://hackage.haskell.org/package/ideas-math), 
+although these modules were not exposed as a library.
