@@ -33,14 +33,14 @@ links = Links
    { linkTop        = showUri $ ideasLink topAPI
    , linkExercises  = showUri $ ideasLink exercisesAPI
    , linkAPI        = showUri $ ideasLink theAPI
-   , linkExercise   = makeLink exerciseAPI . getId
-   , linkExamples   = makeLink examplesAPI . getId
-   , linkAddExample = makeLink addExampleAPI . getId
-   , linkStrategy   = makeLink strategyAPI . getId
-   , linkRules      = makeLink rulesAPI . getId
-   , linkRule       = \ex r -> showUri $ ideasLink ruleAPI (getId ex) (getId r)
-   , linkState      = \st -> showUri $ ideasLink stateAPI (getId st) (Just (prettyPrinter (exercise st) (stateTerm st))) (Just (show (statePrefix st)))
-   , linkSolution   = \st -> showUri $ ideasLink solutionAPI (getId st) (Just (prettyPrinter (exercise st) (stateTerm st))) (Just (show (statePrefix st)))
+--  , linkExercise   = makeLink exerciseAPI . getId
+--  , linkExamples   = makeLink examplesAPI . getId
+--   , linkAddExample = makeLink addExampleAPI . getId
+--   , linkStrategy   = makeLink strategyAPI . getId
+--   , linkRules      = makeLink rulesAPI . getId
+--   , linkRule       = \ex r -> showUri $ ideasLink ruleAPI (getId ex) (getId r)
+--   , linkState      = \st -> showUri $ ideasLink stateAPI (getId st) (Just (prettyPrinter (exercise st) (stateTerm st))) (Just (show (statePrefix st)))
+--   , linkSolution   = \st -> showUri $ ideasLink solutionAPI (getId st) (Just (prettyPrinter (exercise st) (stateTerm st))) (Just (show (statePrefix st)))
    }
  where
    makeLink f  = showUri . ideasLink f
@@ -51,24 +51,24 @@ links = Links
    exercisesAPI = Proxy :: Proxy GetExercises
    theAPI = Proxy :: Proxy GetAPI
    
-   exerciseAPI = Proxy :: ExerciseProxy GetExercise
-   examplesAPI = Proxy :: ExerciseProxy GetExamples
-   strategyAPI = Proxy :: ExerciseProxy GetStrategy
+--   exerciseAPI = Proxy :: ExerciseProxy GetExercise
+--   examplesAPI = Proxy :: ExerciseProxy GetExamples
+--   strategyAPI = Proxy :: ExerciseProxy GetStrategy
    
-   addExampleAPI = Proxy :: ExerciseProxy AddExample
+--   addExampleAPI = Proxy :: ExerciseProxy AddExample
    
-   rulesAPI = Proxy :: ExerciseProxy GetRules
-   ruleAPI  = Proxy :: ExerciseProxy GetRule
-   stateAPI = Proxy :: ExerciseProxy ("state" :> QueryParam "term" String :> QueryParam "prefix" String :> GetState)
-   solutionAPI = Proxy :: ExerciseProxy ("solution" :> QueryParam "term" String :> QueryParam "prefix" String :> GetDerivation)
+--   rulesAPI = Proxy :: ExerciseProxy GetRules
+--   ruleAPI  = Proxy :: ExerciseProxy GetRule
+--   stateAPI = Proxy :: ExerciseProxy ("state" :> QueryParam "term" String :> QueryParam "prefix" String :> GetState)
+--   solutionAPI = Proxy :: ExerciseProxy ("solution" :> QueryParam "term" String :> QueryParam "prefix" String :> GetDerivation)
 
 -----------------------------------------------------------
 -- Main
 
 restfulMain :: DomainReasoner -> IO ()
 restfulMain dr = do 
-   ref <- newIORef dr
-   run 8081 (serve ideasAPI (ideasServer links ref))
+  ref <- newIORef dr
+  run 8081 (serve ideasAPI (ideasServer links ref))
 
 instance ToHttpApiData Id where
    toUrlPiece = pack . showId
