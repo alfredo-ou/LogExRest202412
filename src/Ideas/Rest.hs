@@ -31,8 +31,8 @@ type ExerciseProxy a = Proxy (Capture "exerciseid" Id :> a)
 links :: Links
 links = Links 
    { linkTop        = showUri $ ideasLink topAPI
-   , linkExercises  = showUri $ ideasLink exercisesAPI
-   , linkAPI        = showUri $ ideasLink theAPI
+--   , linkExercises  = showUri $ ideasLink exercisesAPI
+--   , linkAPI        = showUri $ ideasLink theAPI
 --  , linkExercise   = makeLink exerciseAPI . getId
 --  , linkExamples   = makeLink examplesAPI . getId
 --   , linkAddExample = makeLink addExampleAPI . getId
@@ -48,8 +48,8 @@ links = Links
    showUri x   = pack ("/" ++ show x)
    
    topAPI = Proxy :: Proxy GetDomainReasoner
-   exercisesAPI = Proxy :: Proxy GetExercises
-   theAPI = Proxy :: Proxy GetAPI
+--   exercisesAPI = Proxy :: Proxy GetExercises
+--   theAPI = Proxy :: Proxy GetAPI
    
 --   exerciseAPI = Proxy :: ExerciseProxy GetExercise
 --   examplesAPI = Proxy :: ExerciseProxy GetExamples
