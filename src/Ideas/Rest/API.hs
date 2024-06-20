@@ -41,7 +41,7 @@ type IdeasAPI =
    :<|> ExerciseAPI
    
 type ExerciseAPI = Capture "exerciseid" Id :>
-   (    GetExercise
+   (    GetExercise {-
    :<|> GetExamples
    :<|> GetExamplesDifficulty
 --   :<|> AddExample
@@ -50,7 +50,7 @@ type ExerciseAPI = Capture "exerciseid" Id :>
    :<|> GetRules
    :<|> GetRule
    :<|> "state" :> QueryParam "term" String :> QueryParam "prefix" String :> GetState
-   :<|> "solution" :> QueryParam "term" String :> QueryParam "prefix" String :> GetDerivation
+   :<|> "solution" :> QueryParam "term" String :> QueryParam "prefix" String :> GetDerivation -}
    )
 
 -----------------------------------------------------------
@@ -92,7 +92,7 @@ ideasServer links ref =
 exerciseServer :: Links -> IORef DomainReasoner -> Server ExerciseAPI
 exerciseServer links ref s = 
    withExercise ref s (RExercise links) 
- :<|> 
+{- :<|> 
    withExercise ref s (\ex -> RExamples links ex (examples ex))
  :<|>
    (\dif -> withExercise ref s (\ex -> RExamples links ex (filter ((==dif) . fst) (examples ex))))
@@ -137,12 +137,14 @@ exerciseServer links ref s =
                let st = emptyState ex a 
                in case solution Nothing st of
                      Left msg -> error msg 
-                     Right d  -> return (RDerivation links ex d))
+                     Right d  -> return (RDerivation links ex d)) -}
 
 someExercise :: MonadIO m => IORef DomainReasoner -> Id -> m (Some Exercise)
 someExercise ref s = do
    dr <- liftIO (readIORef ref)
-   findExercise dr s
+   case findExercise dr s of
+      Left msg -> error msg -- to do: fail gracefully
+      Right a  -> return a
 
 withDomainReasoner :: MonadIO m => IORef DomainReasoner -> (DomainReasoner -> a) -> m a
 withDomainReasoner ref f = do 
@@ -159,7 +161,8 @@ withExercise ref s f = do
    Some ex <- someExercise ref s
    return (f ex) 
    
-instance ToSample Char
+instance ToSample Char where
+   toSamples _ = []
 
 instance ToSample Difficulty where
    toSamples _ = []
