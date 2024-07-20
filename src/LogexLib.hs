@@ -24,7 +24,10 @@ import Ideas.Service.BasicServices
 import Ideas.Service.Diagnose
 import Ideas.Service.Types
 import Ideas.Service.State
-import Ideas.Main.Default
+--import Ideas.Main.Default
+-- ++AS
+import Ideas.Service.DomainReasoner
+import Ideas.Rest
 import Domain.Logic.NormalForms.Exercises
 import Domain.Logic.Consequence.Exercise
 import Domain.Logic.Equivalence.Exercise
@@ -36,9 +39,11 @@ ideasLogic :: DomainReasoner
 ideasLogic = describe "Domain reasoner for logic" $
    (newDomainReasoner "ideas-logic")
       { exercises = myExercises
+{--
       , services  = myServices
       , aliases   = myAliases
       , scripts   = myScripts
+-}
       }
 
 myExercises :: [Some Exercise]
@@ -58,13 +63,15 @@ myExercises =
    , Some inductiveGuidedExercise
    ]
 
+{--
 myServices :: [Service]
 myServices = metaServiceList ideasLogic ++
    diagnoseS : mySolution : myDerivationS : myOneFinal : myExampleFinal : constraintsS : filter p serviceList
  where
    p = (`notElem` [newId "basic.solution", newId "basic.derivation", newId "basic.onefinal", newId "basic.diagnose"]) . getId
+   ServiceList
+-}
 
--- ServiceList
 mySolution :: Service
 mySolution = makeService "basic.solution"
    "Returns one possible worked-out solution starting with the \
@@ -161,3 +168,5 @@ diagnoseWithPredicates st ctx mid = f (diagnoseOption True st ctx mid)
 ideasLib :: IO ()
 ideasLib = do
         putStrLn "LogexLib"
+        restfulMain ideasLogic
+--      defaultMain ideasLogic

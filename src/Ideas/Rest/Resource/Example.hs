@@ -29,8 +29,7 @@ type GetExamples = "examples" :> Get '[JSON] ResourceExamples
 type GetExamplesDifficulty = "examples" :> Capture "difficulty" Difficulty :> Get '[JSON] ResourceExamples
 
 --instance ToJSON ResourceExamples where
---   toJSON (RExamples links ex xs) =
---      toJSON [ RExample links ex dif a | (dif, a) <- xs ]
+--   toJSON (RExamples links ex xs) = toJSON [ RExample links ex dif a | (dif, a) <- xs ]
 
 instance ToJSON ResourceExample where
    toJSON (RExample _ ex dif a) = String (pack (prettyPrinter ex a ++ " " ++ show dif))

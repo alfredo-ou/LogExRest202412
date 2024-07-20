@@ -27,10 +27,11 @@ import qualified LogexLib (ideasLib)
 import qualified ServantLib (servantServer)
 import Ideas.Rest
 
+
 main :: IO ()
 main = do
+         putStrLn "Main"
          LogexLib.ideasLib
-         ServantLib.servantServer
---         run 8081 app2
+
 
 
