@@ -45,8 +45,8 @@ type DomainReasonerAPI = Capture "id" Id :>
    ( GetDomainReasoner )
 
 type ExerciseAPI = Capture "exerciseid" Id :>
-   (    GetExercise{-
-   :<|> GetExamples
+   (    GetExercise
+   :<|> GetExamples{--
    :<|> GetExamplesDifficulty
 --   :<|> AddExample
 --   :<|> "examples" :>  ReqBody '[JSON] NewExample :> PostNoContent '[JSON] () -}
@@ -100,9 +100,9 @@ ideasServer links ref =
 
 exerciseServer :: Links -> IORef DomainReasoner -> Server ExerciseAPI
 exerciseServer links ref s =
-   withExercise ref s (RExercise links){--
+   withExercise ref s (RExercise links)
  :<|>
-   withExercise ref s (\ex -> RExamples links ex (examples ex))
+   withExercise ref s (\ex -> RExamples links ex (examples ex)){--
  :<|>
    (\dif -> withExercise ref s (\ex -> RExamples links ex (filter ((==dif) . fst) (examples ex))))
  :<|>
@@ -118,8 +118,7 @@ exerciseServer links ref s =
  :<|>
    withExercise ref s (RStrategy . strategy)
  :<|>
-   withExercise ref s (\ex -> RRules links ex (ruleset ex))
-{--
+   withExercise ref s (\ex -> RRules links ex (ruleset ex)){--
  :<|>
    (\n -> withExerciseM ref s (\ex -> do
       r <- getRule ex n

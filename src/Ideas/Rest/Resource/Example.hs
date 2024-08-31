@@ -8,6 +8,7 @@ module Ideas.Rest.Resource.Example where
 
 import Control.Monad
 import Ideas.Common.Library
+import Ideas.Common.Examples
 import Data.Aeson.Types
 import Data.Function
 import Data.List
@@ -22,14 +23,19 @@ import Ideas.Service.State
 
 data ResourceExamples = forall a . RExamples Links (Exercise a) (Examples a)
 
-data ResourceExample = forall a . RExample Links (Exercise a) Difficulty a
+data ResourceExample = forall a . RExample Links (Exercise a) (Maybe Difficulty) a
 
 type GetExamples = "examples" :> Get '[JSON] ResourceExamples
 
 type GetExamplesDifficulty = "examples" :> Capture "difficulty" Difficulty :> Get '[JSON] ResourceExamples
 
 --instance ToJSON ResourceExamples where
---   toJSON (RExamples links ex xs) = toJSON [ RExample links ex dif a | (dif, a) <- xs ]
+--    toJSON (RExamples links ex xs) = toJSON [ RExample links ex dif a | (dif, a) <- xs ]
+
+instance ToJSON ResourceExamples where
+    toJSON (RExamples links ex exs) =
+        let examplesList = [ RExample links ex md a | (md, a) <- allExamples exs ]
+        in toJSON examplesList
 
 instance ToJSON ResourceExample where
    toJSON (RExample _ ex dif a) = String (pack (prettyPrinter ex a ++ " " ++ show dif))

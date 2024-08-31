@@ -27,7 +27,6 @@ import qualified LogexLib (ideasLib)
 import qualified ServantLib (servantServer)
 import Ideas.Rest
 
-
 main :: IO ()
 main = do
          putStrLn "Main"
