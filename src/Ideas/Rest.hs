@@ -22,7 +22,8 @@ import Ideas.Rest.Resource.Example
 import Ideas.Rest.Resource.State
 import Ideas.Rest.Resource.Derivation
 import Ideas.Rest.Resource.Strategy
-import Ideas.Rest.Resource.Rule
+--import Ideas.Rest.Resource.Rule
+import Ideas.Rest.Resource.KnowledgeComponent
 import Ideas.Rest.API
 import Ideas.Rest.Resource.API
 

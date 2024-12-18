@@ -19,7 +19,8 @@ import Ideas.Rest.Resource.Exercise
 import Ideas.Rest.Resource.Example
 import Ideas.Rest.Resource.State
 import Ideas.Rest.Resource.Strategy
-import Ideas.Rest.Resource.Rule
+--import Ideas.Rest.Resource.Rule
+import Ideas.Rest.Resource.KnowledgeComponent
 import Ideas.Rest.Resource.DomainReasoner
 import Ideas.Rest.Resource.API
 import Ideas.Rest.Resource.Derivation
