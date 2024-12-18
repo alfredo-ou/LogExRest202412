@@ -16,6 +16,7 @@ import Servant.Docs
 import Servant hiding (Context)
 --import Servant.HTML.Lucid
 
+
 data KnowledgeComponents = forall a . RRules Links (Exercise a) [Rule (Context a)]
 
 data KnowledgeComponent = forall a . RRule Links (Exercise a) (Rule (Context a))
